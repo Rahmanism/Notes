@@ -1,12 +1,14 @@
 import { useRef, useState } from "react"
 import { Button, Col, Form, Row, Stack } from "react-bootstrap"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import CreatableReactSelect from "react-select/creatable"
+import { v4 as uuidV4 } from "uuid"
 
-export function NoteForm({ onSubmit }) {
+export function NoteForm({ onSubmit, onAddTag, availableTags }) {
   const titleRef = useRef(null)
   const markdownRef = useRef(null)
   const [selectedTags, setSelectedTags] = useState([])
+  const navigate = useNavigate()
 
   function handleSubmit(e) {
     e.preventDefault()
@@ -19,6 +21,8 @@ export function NoteForm({ onSubmit }) {
     if (onSubmit) {
       onSubmit(note)
     }
+
+    navigate('..')
   }
 
   return (
@@ -36,6 +40,14 @@ export function NoteForm({ onSubmit }) {
               <Form.Label>Tags</Form.Label>
               <CreatableReactSelect
                 isMulti
+                onCreateOption={(label) => {
+                  const newTag = { id: uuidV4(), label }
+                  onAddTag(newTag)
+                  setSelectedTags((prev) => [...prev, newTag])
+                }}
+                options={availableTags.map((tag) => {
+                  return { label: tag.label, value: tag.id }
+                })}
                 value={selectedTags.map((tag) => {
                   return { label: tag.label, value: tag.id }
                 })}
