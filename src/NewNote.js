@@ -1,14 +1,10 @@
-import { NoteForm } from "./NoteForm"
+import { NoteForm } from "NoteForm"
 
-export function NewNote() {
-  function submit(note) {
-    console.log("new note:", note)
-  }
-  
+export function NewNote({ onSubmit }) {
   return (
     <>
       <h1 className="mb-4">New Note</h1>
-      <NoteForm onSubmit={submit} />
+      <NoteForm onSubmit={onSubmit} />
     </>
   )
 }
