@@ -12,12 +12,13 @@ export function NoteForm({ onSubmit, onAddTag, availableTags }) {
 
   function handleSubmit(e) {
     e.preventDefault()
+
     const note = {
       title: titleRef.current.value,
       markdown: markdownRef.current.value,
       tags: selectedTags,
     }
-    console.log("💻💻💻", note)
+
     if (onSubmit) {
       onSubmit(note)
     }
@@ -68,7 +69,7 @@ export function NoteForm({ onSubmit, onAddTag, availableTags }) {
         </Form.Group>
         <Stack direction="horizontal" gap={2} className="justify-content-end">
           <Link to="..">
-            <Button type="button" variant="outlined-secondary">
+            <Button type="button" variant="outline-secondary">
               Cancel
             </Button>
           </Link>
