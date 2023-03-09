@@ -30,6 +30,9 @@ export function NoteList({ notes, availableTags, onUpdateTag, onDeleteTag }) {
         </Col>
         <Col xs="auto">
           <Stack gap={2} direction="horizontal">
+            <Link to="/about">
+              <Button variant="outline-warning">About</Button>
+            </Link>
             <Button
               variant="outline-secondary"
               onClick={() => setEditTagsModalOpen(true)}

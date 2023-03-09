@@ -5,6 +5,7 @@ import { NewNote, EditNote, NoteList, Note, NoteLayout } from "screen"
 import { useLocalStorage } from "hooks"
 import { useMemo } from "react"
 import { v4 as uuidV4 } from "uuid"
+import { About } from "screen/About"
 
 function App() {
   const [notes, setNotes] = useLocalStorage("NOTES", [])
@@ -104,6 +105,7 @@ function App() {
             }
           />
         </Route>
+        <Route path="/about" element={<About />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </Container>
