@@ -10,14 +10,15 @@ export function NoteList({ notes, availableTags }) {
   const filteredNotes = useMemo(() => {
     return notes.filter((note) => {
       return (
-        title === "" || note.title.toLowerCase().includes(title.toLowerCase())
-      ) && (selectedTags.length === 0 || selectedTags.every(tag => {
-        return note.tags.some(noteTag => noteTag.id === tag.id)
-      }))
+        (title === "" ||
+          note.title.toLowerCase().includes(title.toLowerCase())) &&
+        (selectedTags.length === 0 ||
+          selectedTags.every((tag) => {
+            return note.tags.some((noteTag) => noteTag.id === tag.id)
+          }))
+      )
     })
   }, [notes, selectedTags, title])
-
-  console.log('📝📒 notes: ', notes)
 
   return (
     <>
@@ -71,9 +72,11 @@ export function NoteList({ notes, availableTags }) {
       </Form>
       <Row xs={1} sm={2} lg={3} xl={4} className="g-3">
         {filteredNotes.map((note) => {
-          return <Col key={note.id}>
-            <NoteCard note={note} />
-          </Col>
+          return (
+            <Col key={note.id}>
+              <NoteCard note={note} />
+            </Col>
+          )
         })}
       </Row>
     </>
