@@ -1,6 +1,6 @@
 import { Badge, Card, Row, Stack } from "react-bootstrap"
 import { Link } from "react-router-dom"
-import styles from "NoteList.module.css"
+import styles from "style/NoteList.module.css"
 
 export function NoteCard({ note }) {
   const { id, title, tags } = note

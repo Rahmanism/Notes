@@ -1,12 +1,14 @@
-import { NoteCard } from "NoteCard"
+import { EditTagsModal } from "component"
+import { NoteCard } from "component"
 import { useMemo, useState } from "react"
 import { Button, Col, Form, Row, Stack } from "react-bootstrap"
 import { Link } from "react-router-dom"
 import ReactSelect from "react-select"
 
-export function NoteList({ notes, availableTags }) {
+export function NoteList({ notes, availableTags, onUpdateTag, onDeleteTag }) {
   const [selectedTags, setSelectedTags] = useState([])
   const [title, setTitle] = useState("")
+  const [editTagsModalOpen, setEditTagsModalOpen] = useState(false)
   const filteredNotes = useMemo(() => {
     return notes.filter((note) => {
       return (
@@ -28,7 +30,12 @@ export function NoteList({ notes, availableTags }) {
         </Col>
         <Col xs="auto">
           <Stack gap={2} direction="horizontal">
-            <Button variant="outline-secondary">Edit Tags</Button>
+            <Button
+              variant="outline-secondary"
+              onClick={() => setEditTagsModalOpen(true)}
+            >
+              Edit Tags
+            </Button>
             <Link to="/new">
               <Button variant="primary">Create</Button>
             </Link>
@@ -79,6 +86,13 @@ export function NoteList({ notes, availableTags }) {
           )
         })}
       </Row>
+      <EditTagsModal
+        onUpdate={onUpdateTag}
+        onDelete={onDeleteTag}
+        show={editTagsModalOpen}
+        handleClose={() => setEditTagsModalOpen(false)}
+        availableTags={availableTags}
+      />
     </>
   )
 }

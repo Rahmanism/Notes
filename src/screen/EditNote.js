@@ -1,4 +1,4 @@
-import { NoteForm } from "NoteForm"
+import { NoteForm } from "component"
 import { useOutletContext } from "react-router-dom"
 
 export function EditNote({ onSubmit, onAddTag, availableTags }) {
