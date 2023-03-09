@@ -4,11 +4,13 @@ import { Link, useNavigate } from "react-router-dom"
 import CreatableReactSelect from "react-select/creatable"
 import { v4 as uuidV4 } from "uuid"
 
-export function NoteForm({ onSubmit, onAddTag, availableTags }) {
+export function NoteForm({ onSubmit, onAddTag, availableTags, note }) {
   const titleRef = useRef(null)
   const markdownRef = useRef(null)
-  const [selectedTags, setSelectedTags] = useState([])
+  const [selectedTags, setSelectedTags] = useState(note?.tags)
   const navigate = useNavigate()
+
+  console.log("🎃 note:", note)
 
   function handleSubmit(e) {
     e.preventDefault()
@@ -23,7 +25,7 @@ export function NoteForm({ onSubmit, onAddTag, availableTags }) {
       onSubmit(note)
     }
 
-    navigate('..')
+    navigate("..")
   }
 
   return (
@@ -33,7 +35,7 @@ export function NoteForm({ onSubmit, onAddTag, availableTags }) {
           <Col>
             <Form.Group controlId="title">
               <Form.Label>Title</Form.Label>
-              <Form.Control ref={titleRef} required />
+              <Form.Control ref={titleRef} required defaultValue={note?.title} />
             </Form.Group>
           </Col>
           <Col>
@@ -49,7 +51,7 @@ export function NoteForm({ onSubmit, onAddTag, availableTags }) {
                 options={availableTags.map((tag) => {
                   return { label: tag.label, value: tag.id }
                 })}
-                value={selectedTags.map((tag) => {
+                value={selectedTags?.map((tag) => {
                   return { label: tag.label, value: tag.id }
                 })}
                 onChange={(tags) => {
@@ -65,7 +67,13 @@ export function NoteForm({ onSubmit, onAddTag, availableTags }) {
         </Row>
         <Form.Group controlId="markdown">
           <Form.Label>Body</Form.Label>
-          <Form.Control ref={markdownRef} required as="textarea" rows={10} />
+          <Form.Control
+            ref={markdownRef}
+            required
+            as="textarea"
+            rows={10}
+            defaultValue={note?.markdown}
+          />
         </Form.Group>
         <Stack direction="horizontal" gap={2} className="justify-content-end">
           <Link to="..">

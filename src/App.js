@@ -2,6 +2,7 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import { Container } from "react-bootstrap"
 import { Navigate, Route, Routes } from "react-router-dom"
 import { NewNote } from "NewNote"
+import { EditNote } from "EditNote"
 import { useLocalStorage } from "useLocalStorage"
 import { useMemo } from "react"
 import { v4 as uuidV4 } from "uuid"
@@ -28,6 +29,22 @@ function App() {
     })
   }
 
+  function onEditNote(id, {tags, ...data}) {
+    setNotes((prevNotes) => {
+      return prevNotes.map(note => {
+        if (note.id === id) {
+          return {
+            ...note,
+            ...data,
+            tagIds: tags.map((t) => t.id)
+          }
+        } else {
+          return note
+        }
+      })
+    })
+  }
+
   function addTag(tag) {
     setTags((prev) => [...prev, tag])
   }
@@ -51,7 +68,16 @@ function App() {
         />
         <Route path="/:id" element={<NoteLayout notes={notesWithTags} />}>
           <Route index element={<Note />} />
-          <Route path="edit" element={<h1>Edit</h1>} />
+          <Route
+            path="edit"
+            element={
+              <EditNote
+                onSubmit={onEditNote}
+                onAddTag={addTag}
+                availableTags={tags}
+              />
+            }
+          />
         </Route>
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
