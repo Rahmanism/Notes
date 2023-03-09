@@ -1,10 +1,22 @@
 import { Badge, Button, Col, Row, Stack } from "react-bootstrap"
 import { ReactMarkdown } from "react-markdown/lib/react-markdown"
-import { Link, useOutletContext } from "react-router-dom"
+import { Link, useNavigate, useOutletContext } from "react-router-dom"
 
-export function Note() {
+export function Note({ onDelete }) {
   const note = useOutletContext()
+  const navigate = useNavigate()
   console.log("🍘 ~ file: Note.js:5 ~ Note ~ note:", note)
+
+  function onDeleteNote() {
+    if (onDelete) {
+        if (window.confirm("Are you sure you want to delete?")) {
+            onDelete(note.id)
+            navigate("/")
+        }
+    } else {
+        alert("Cannot delete")
+    }
+  }
 
   return (
     <>
@@ -25,7 +37,9 @@ export function Note() {
               <Button variant="primary">Edit</Button>
             </Link>
             <Link to="#">
-              <Button variant="outline-danger">Delete</Button>
+              <Button variant="outline-danger" onClick={onDeleteNote}>
+                Delete
+              </Button>
             </Link>
             <Link to="..">
               <Button variant="outline-secondary">Back</Button>
