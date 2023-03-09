@@ -35,7 +35,11 @@ export function NoteForm({ onSubmit, onAddTag, availableTags, note }) {
           <Col>
             <Form.Group controlId="title">
               <Form.Label>Title</Form.Label>
-              <Form.Control ref={titleRef} required defaultValue={note?.title} />
+              <Form.Control
+                ref={titleRef}
+                required
+                defaultValue={note?.title}
+              />
             </Form.Group>
           </Col>
           <Col>
@@ -46,7 +50,9 @@ export function NoteForm({ onSubmit, onAddTag, availableTags, note }) {
                 onCreateOption={(label) => {
                   const newTag = { id: uuidV4(), label }
                   onAddTag(newTag)
-                  setSelectedTags((prev) => [...prev, newTag])
+                  setSelectedTags((prev) => {
+                    return prev?.length > 0 ? [...prev, newTag] : [newTag]
+                  })
                 }}
                 options={availableTags.map((tag) => {
                   return { label: tag.label, value: tag.id }

@@ -1,6 +1,7 @@
 {
   "short_name": "Notes",
   "name": "A Simple Markdown Note Taking App",
+  "version": "0.2.0.3",
   "icons": [
     {
       "src": "favicon.ico",
