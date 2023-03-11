@@ -29,6 +29,9 @@ export function About() {
         <Link to="https://rahmanism.github.io">
           <Button variant="outline-primary">Rahmanism</Button>
         </Link>
+        <Link to="https://github.com/Rahmanism/Notes">
+          <Button variant="outline-primary">Source</Button>
+        </Link>
       </Stack>
     </>
   )
