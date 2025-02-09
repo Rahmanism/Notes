@@ -1,5 +1,5 @@
-import { NoteForm } from "component"
-import { useOutletContext } from "react-router-dom"
+import { NoteForm } from 'components'
+import { useOutletContext } from 'react-router-dom'
 
 export function EditNote({ onSubmit, onAddTag, availableTags }) {
   const note = useOutletContext()

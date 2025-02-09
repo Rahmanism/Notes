@@ -1,4 +1,4 @@
-import { NoteForm } from "component"
+import { NoteForm } from 'components'
 
 export function NewNote({ onSubmit, onAddTag, availableTags }) {
   return (

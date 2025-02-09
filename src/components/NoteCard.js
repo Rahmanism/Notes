@@ -1,4 +1,4 @@
-import { Badge, Card, Row, Stack } from "react-bootstrap"
+import { Badge, Card, Stack } from "react-bootstrap"
 import { Link } from "react-router-dom"
 import styles from "style/NoteList.module.css"
 

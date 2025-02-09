@@ -1,0 +1,8 @@
+.no-underline,
+.no-underline:hover {
+  text-decoration: none;
+}
+
+.block {
+  display: block;
+}

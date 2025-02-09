@@ -1,18 +1,19 @@
-import { EditTagsModal } from "component"
-import { NoteCard } from "component"
-import { useMemo, useState } from "react"
-import { Button, Col, Form, Row, Stack } from "react-bootstrap"
-import { Link } from "react-router-dom"
-import ReactSelect from "react-select"
+import { EditTagsModal } from 'components'
+import { NoteCard } from 'components'
+import OptionsMenu from 'components/OptionsMenu'
+import { useMemo, useState } from 'react'
+import { Button, Col, Form, Row, Stack } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
+import ReactSelect from 'react-select'
 
 export function NoteList({ notes, availableTags, onUpdateTag, onDeleteTag }) {
   const [selectedTags, setSelectedTags] = useState([])
-  const [title, setTitle] = useState("")
+  const [title, setTitle] = useState('')
   const [editTagsModalOpen, setEditTagsModalOpen] = useState(false)
   const filteredNotes = useMemo(() => {
     return notes.filter((note) => {
       return (
-        (title === "" ||
+        (title === '' ||
           note.title.toLowerCase().includes(title.toLowerCase())) &&
         (selectedTags.length === 0 ||
           selectedTags.every((tag) => {
@@ -29,8 +30,12 @@ export function NoteList({ notes, availableTags, onUpdateTag, onDeleteTag }) {
           <h1>Notes</h1>
         </Col>
         <Col xs="auto">
-          <Stack gap={2} direction="horizontal">
-            <Link to="/about">
+          <Stack
+            gap={2}
+            direction="horizontal"
+          >
+            <OptionsMenu editTagsClicked={() => setEditTagsModalOpen(true)} />
+            {/* <Link to="/about">
               <Button variant="outline-warning">About</Button>
             </Link>
             <Button
@@ -38,7 +43,7 @@ export function NoteList({ notes, availableTags, onUpdateTag, onDeleteTag }) {
               onClick={() => setEditTagsModalOpen(true)}
             >
               Edit Tags
-            </Button>
+            </Button> */}
             <Link to="/new">
               <Button variant="primary">Create</Button>
             </Link>
@@ -80,7 +85,13 @@ export function NoteList({ notes, availableTags, onUpdateTag, onDeleteTag }) {
           </Col>
         </Row>
       </Form>
-      <Row xs={1} sm={2} lg={3} xl={4} className="g-3">
+      <Row
+        xs={1}
+        sm={2}
+        lg={3}
+        xl={4}
+        className="g-3"
+      >
         {filteredNotes.map((note) => {
           return (
             <Col key={note.id}>
