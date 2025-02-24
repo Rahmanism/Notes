@@ -1,3 +1,37 @@
+:root {
+  transition: all 0.3s ease-in-out;
+
+  --dark: #212529;
+  --light: #ffff;
+  --bg-color: var(--light);
+  --bs-body-bg: var(--light);
+  --text-color: var(--dark);
+  --bs-body-color: var(--dark);
+  --card-bg: #f8f9fa;
+}
+
+[data-theme='dark'], .dark {
+  --bg-color: var(--dark);
+  --bs-body-bg: var(--dark);
+  --text-color: var(--light);
+  --bs-body-color: var(--light);
+  --card-bg: #343a40;
+}
+
+.dark * {
+  background-color: var(--dark) !important;
+  color: var(--light) !important;
+}
+
+body {
+  background-color: var(--bg-color) !important;
+  color: var(--text-color) !important;
+}
+
+.card {
+  background-color: var(--card-bg) !important;
+}
+
 .no-underline,
 .no-underline:hover {
   text-decoration: none;

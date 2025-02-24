@@ -1,6 +1,7 @@
 import { EditTagsModal } from 'components'
 import { NoteCard } from 'components'
 import OptionsMenu from 'components/OptionsMenu'
+import { useDarkMode } from 'hooks/DarkModeContext'
 import { useMemo, useState } from 'react'
 import { Button, Col, Form, Row, Stack } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
@@ -8,6 +9,7 @@ import ReactSelect from 'react-select'
 
 export function NoteList({ notes, availableTags, onUpdateTag, onDeleteTag }) {
   const [selectedTags, setSelectedTags] = useState([])
+  const { darkMode } = useDarkMode()
   const [title, setTitle] = useState('')
   const [editTagsModalOpen, setEditTagsModalOpen] = useState(false)
   const filteredNotes = useMemo(() => {
@@ -35,15 +37,6 @@ export function NoteList({ notes, availableTags, onUpdateTag, onDeleteTag }) {
             direction="horizontal"
           >
             <OptionsMenu editTagsClicked={() => setEditTagsModalOpen(true)} />
-            {/* <Link to="/about">
-              <Button variant="outline-warning">About</Button>
-            </Link>
-            <Button
-              variant="outline-secondary"
-              onClick={() => setEditTagsModalOpen(true)}
-            >
-              Edit Tags
-            </Button> */}
             <Link to="/new">
               <Button variant="primary">Create</Button>
             </Link>
@@ -66,6 +59,7 @@ export function NoteList({ notes, availableTags, onUpdateTag, onDeleteTag }) {
             <Form.Group controlId="tags">
               <Form.Label>Tags</Form.Label>
               <ReactSelect
+                className={darkMode ? 'dark' : 'light'}
                 isMulti
                 value={selectedTags.map((tag) => {
                   return { label: tag.label, value: tag.id }

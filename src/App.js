@@ -1,15 +1,17 @@
-import "bootstrap/dist/css/bootstrap.min.css"
-import { Container } from "react-bootstrap"
-import { Navigate, Route, Routes } from "react-router-dom"
-import { NewNote, EditNote, NoteList, Note, NoteLayout } from "screen"
-import { useLocalStorage } from "hooks"
-import { useMemo } from "react"
-import { v4 as uuidV4 } from "uuid"
-import { About } from "screen/About"
+import { useEffect, useMemo } from 'react'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import { Container, Navbar } from 'react-bootstrap'
+import { Navigate, Route, Routes } from 'react-router-dom'
+import { NewNote, EditNote, NoteList, Note, NoteLayout } from 'screen'
+import { useLocalStorage } from 'hooks'
+import { v4 as uuidV4 } from 'uuid'
+import { About } from 'screen/About'
+import { useDarkMode } from 'hooks/DarkModeContext'
 
 function App() {
-  const [notes, setNotes] = useLocalStorage("NOTES", [])
-  const [tags, setTags] = useLocalStorage("TAGS", [])
+  const [notes, setNotes] = useLocalStorage('NOTES', [])
+  const [tags, setTags] = useLocalStorage('TAGS', [])
+  const { darkMode } = useDarkMode()
 
   const notesWithTags = useMemo(() => {
     return notes.map((note) => {
@@ -68,8 +70,16 @@ function App() {
     setTags((prev) => prev.filter((t) => t.id !== id))
   }
 
+  useEffect(() => {
+    console.log('👁️ darkMode:', darkMode)
+    document.body.dataset.theme = darkMode ? 'dark' : 'light'
+  }, [darkMode])
+
   return (
-    <Container className="my-4">
+    <Container
+      className="my-4"
+      data-theme={darkMode ? 'dark' : 'light'}
+    >
       <Routes>
         <Route
           path="/"
@@ -92,8 +102,14 @@ function App() {
             />
           }
         />
-        <Route path="/:id" element={<NoteLayout notes={notesWithTags} />}>
-          <Route index element={<Note onDelete={onDeleteNote} />} />
+        <Route
+          path="/:id"
+          element={<NoteLayout notes={notesWithTags} />}
+        >
+          <Route
+            index
+            element={<Note onDelete={onDeleteNote} />}
+          />
           <Route
             path="edit"
             element={
@@ -105,8 +121,14 @@ function App() {
             }
           />
         </Route>
-        <Route path="/about" element={<About />} />
-        <Route path="*" element={<Navigate to="/" />} />
+        <Route
+          path="/about"
+          element={<About />}
+        />
+        <Route
+          path="*"
+          element={<Navigate to="/" />}
+        />
       </Routes>
     </Container>
   )

@@ -1,3 +1,4 @@
+import { useDarkMode } from "hooks/DarkModeContext"
 import { useRef, useState } from "react"
 import { Button, Col, Form, Row, Stack } from "react-bootstrap"
 import { Link, useNavigate } from "react-router-dom"
@@ -6,6 +7,7 @@ import { v4 as uuidV4 } from "uuid"
 
 export function NoteForm({ onSubmit, onAddTag, availableTags, note }) {
   const titleRef = useRef(null)
+  const { darkMode } = useDarkMode()
   const markdownRef = useRef(null)
   const [selectedTags, setSelectedTags] = useState(note?.tags)
   const navigate = useNavigate()
@@ -46,6 +48,7 @@ export function NoteForm({ onSubmit, onAddTag, availableTags, note }) {
             <Form.Group controlId="tags">
               <Form.Label>Tags</Form.Label>
               <CreatableReactSelect
+                className={darkMode ? 'dark' : 'light'}
                 isMulti
                 onCreateOption={(label) => {
                   const newTag = { id: uuidV4(), label }
@@ -81,13 +84,23 @@ export function NoteForm({ onSubmit, onAddTag, availableTags, note }) {
             defaultValue={note?.markdown}
           />
         </Form.Group>
-        <Stack direction="horizontal" gap={2} className="justify-content-end">
+        <Stack
+          direction="horizontal"
+          gap={2}
+          className="justify-content-end"
+        >
           <Link to="..">
-            <Button type="button" variant="outline-secondary">
+            <Button
+              type="button"
+              variant="outline-secondary"
+            >
               Cancel
             </Button>
           </Link>
-          <Button type="submit" variant="primary">
+          <Button
+            type="submit"
+            variant="primary"
+          >
             Save
           </Button>
         </Stack>
