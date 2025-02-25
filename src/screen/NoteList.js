@@ -9,7 +9,7 @@ import ReactSelect from 'react-select'
 
 export function NoteList({ notes, availableTags, onUpdateTag, onDeleteTag }) {
   const [selectedTags, setSelectedTags] = useState([])
-  const { darkMode } = useDarkMode()
+  const { colorTheme } = useDarkMode()
   const [title, setTitle] = useState('')
   const [editTagsModalOpen, setEditTagsModalOpen] = useState(false)
   const filteredNotes = useMemo(() => {
@@ -59,7 +59,7 @@ export function NoteList({ notes, availableTags, onUpdateTag, onDeleteTag }) {
             <Form.Group controlId="tags">
               <Form.Label>Tags</Form.Label>
               <ReactSelect
-                className={darkMode ? 'dark' : 'light'}
+                className={`${colorTheme} react-select`}
                 isMulti
                 value={selectedTags.map((tag) => {
                   return { label: tag.label, value: tag.id }

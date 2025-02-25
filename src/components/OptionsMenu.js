@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom'
 import exportJson from 'services/exportJson'
 
 function OptionsMenu({ editTagsClicked }) {
-    const { darkMode, toggleDarkMode } = useDarkMode()
-  
+  const { colorTheme, setColorTheme, currentColorTheme } = useDarkMode()
+
   return (
     <Dropdown>
       <Dropdown.Toggle
@@ -16,9 +16,17 @@ function OptionsMenu({ editTagsClicked }) {
         Menu
       </Dropdown.Toggle>
       <Dropdown.Menu>
-        <Dropdown.Item onClick={toggleDarkMode}>
-          {darkMode ? 'Light Mode' : 'Dark Mode'}
+        <Dropdown.Item
+          onClick={() =>
+            setColorTheme(colorTheme === 'dark' ? 'light' : 'dark')
+          }
+        >
+          {colorTheme === 'dark' ? 'Light Mode' : 'Dark Mode'}
         </Dropdown.Item>
+        <Dropdown.Item onClick={() => setColorTheme('system')}>
+          {currentColorTheme === 'system' && '✓'} System Theme
+        </Dropdown.Item>
+        <Dropdown.Divider />
         <Dropdown.Item onClick={() => editTagsClicked()}>
           Edit Tags
         </Dropdown.Item>

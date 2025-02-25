@@ -1,5 +1,4 @@
 function handleDownload(data) {
-  console.log('allData :', data)
   const stringData = JSON.stringify(data, null, 2)
   const blob = new Blob([stringData], { type: 'application/json' })
   const url = URL.createObjectURL(blob)

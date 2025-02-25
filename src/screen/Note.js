@@ -5,7 +5,6 @@ import { Link, useNavigate, useOutletContext } from "react-router-dom"
 export function Note({ onDelete }) {
   const note = useOutletContext()
   const navigate = useNavigate()
-  console.log("🍘 ~ file: Note.js:5 ~ Note ~ note:", note)
 
   function onDeleteNote() {
     if (onDelete) {

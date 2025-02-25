@@ -7,12 +7,10 @@ import { v4 as uuidV4 } from "uuid"
 
 export function NoteForm({ onSubmit, onAddTag, availableTags, note }) {
   const titleRef = useRef(null)
-  const { darkMode } = useDarkMode()
+  const { colorTheme } = useDarkMode()
   const markdownRef = useRef(null)
   const [selectedTags, setSelectedTags] = useState(note?.tags)
   const navigate = useNavigate()
-
-  console.log("🎃 note:", note)
 
   function handleSubmit(e) {
     e.preventDefault()
@@ -48,7 +46,8 @@ export function NoteForm({ onSubmit, onAddTag, availableTags, note }) {
             <Form.Group controlId="tags">
               <Form.Label>Tags</Form.Label>
               <CreatableReactSelect
-                className={darkMode ? 'dark' : 'light'}
+                className={`${colorTheme} react-select`}
+                data-bs-theme={colorTheme}
                 isMulti
                 onCreateOption={(label) => {
                   const newTag = { id: uuidV4(), label }

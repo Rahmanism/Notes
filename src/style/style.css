@@ -1,35 +1,16 @@
 :root {
   transition: all 0.3s ease-in-out;
-
-  --dark: #212529;
-  --light: #ffff;
-  --bg-color: var(--light);
-  --bs-body-bg: var(--light);
-  --text-color: var(--dark);
-  --bs-body-color: var(--dark);
-  --card-bg: #f8f9fa;
 }
 
-[data-theme='dark'], .dark {
-  --bg-color: var(--dark);
-  --bs-body-bg: var(--dark);
-  --text-color: var(--light);
-  --bs-body-color: var(--light);
-  --card-bg: #343a40;
+.dark.react-select,
+.dark.react-select * {
+  background-color: color-mix(in srgb, var(--bs-body-bg) 95%, white 5%);
+  color: var(--bs-body-color);
+  border-color: var(--bs-border-color);
 }
 
-.dark * {
-  background-color: var(--dark) !important;
-  color: var(--light) !important;
-}
-
-body {
-  background-color: var(--bg-color) !important;
-  color: var(--text-color) !important;
-}
-
-.card {
-  background-color: var(--card-bg) !important;
+.dark.react-select [class$='multiValue'] * {
+  background-color: color-mix(in srgb, var(--bs-body-bg) 80%, white 20%);
 }
 
 .no-underline,

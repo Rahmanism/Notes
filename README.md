@@ -14,4 +14,4 @@ It's a deployment of this video tutorial: [YouTube: Markdown Supported Note Taki
 
 [x] Export JSON of notes and tags (backup)
 [ ] Import them (restore), with and option of remove all current notes, or add to theme.  
-[ ] Dark theme  
+[x] Dark theme  

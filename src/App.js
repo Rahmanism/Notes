@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { Container, Navbar } from 'react-bootstrap'
+import { Container } from 'react-bootstrap'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import { NewNote, EditNote, NoteList, Note, NoteLayout } from 'screen'
 import { useLocalStorage } from 'hooks'
@@ -11,7 +11,7 @@ import { useDarkMode } from 'hooks/DarkModeContext'
 function App() {
   const [notes, setNotes] = useLocalStorage('NOTES', [])
   const [tags, setTags] = useLocalStorage('TAGS', [])
-  const { darkMode } = useDarkMode()
+  const { colorTheme } = useDarkMode()
 
   const notesWithTags = useMemo(() => {
     return notes.map((note) => {
@@ -71,14 +71,15 @@ function App() {
   }
 
   useEffect(() => {
-    console.log('👁️ darkMode:', darkMode)
-    document.body.dataset.theme = darkMode ? 'dark' : 'light'
-  }, [darkMode])
+    document.body.dataset.theme = colorTheme
+    document.body.dataset.bsTheme = colorTheme
+  }, [colorTheme])
 
   return (
     <Container
       className="my-4"
-      data-theme={darkMode ? 'dark' : 'light'}
+      data-theme={colorTheme}
+      data-bs-theme={colorTheme}
     >
       <Routes>
         <Route
